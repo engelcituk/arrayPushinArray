@@ -1,0 +1,25 @@
+<?php
+require_once "conexion.php";
+
+class ModeloUsuarioPermisos{
+
+
+	/*=============================================
+	OBTENGO los permisos del usuario, que recibo desde ajax (id)
+	permisos de tipo acciones
+	=============================================*/
+    static public function mdlMostrarUserPermisos($tabla,$valorDeMiCampo){		
+    //consulto en base al id
+      $stmt = Conexion::conectar()->prepare("SELECT t0.id, t0.nombrePermiso, t1.idPermiso, t1.idUsuario FROM $tabla t0 LEFT JOIN usuario_permisos t1 ON t0.id=t1.idPermiso AND t1.idUsuario=:idUsuario");
+
+      $stmt->bindParam(":idUsuario",$valorDeMiCampo, PDO::PARAM_INT);
+
+      $stmt -> execute();
+
+      return $stmt -> fetchAll();
+
+      $stmt -> close();
+
+      $stmt = null;
+    }
+  }
