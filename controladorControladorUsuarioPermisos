@@ -1,0 +1,18 @@
+class ControladorUsuarioPermisos{	
+	/*=============================================
+	FUNCION PARA BUSCAR EL USUARIO CON SUS PERMISOS
+	=============================================*/
+	public function ctrMostrarPermisosUsuario(){
+
+		if (isset($_GET["idUsuario"])) {
+			
+			$tabla = "usuario_permisos";
+
+			$valorDeMiCampo = $_GET["idUsuario"];
+
+			$respuesta = ModeloUsuarioPermisos::mdlMostrarUserPermisos($tabla, $valorDeMiCampo);
+
+			return $respuesta;
+		}
+	}
+}
